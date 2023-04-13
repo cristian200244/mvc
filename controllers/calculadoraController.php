@@ -1,46 +1,42 @@
-<?php 
+<?php
 
+require_once '../Models/CalculadoraModel.php';
 
-class CalculadoraController {
-    public function __construct() {
-        // $this->view->mensaje = '';
-      
+$calculadora = new CalculadoraController;
+
+class CalculadoraController
+{
+
+    public function __construct()
+    {
+        switch ($_POST['c']) {
+            case '1': //Almacenar en la base de datos
+                self::store();
+                break;
+
+            default:
+                # code...
+                break;
+        }
     }
-    // almacenar
+    
     public function store()
     {
-        $num1 = $_POST['num1'];
-        $num2 = $_POST['num2'];
-        $opcion = $_POST['opcion'];
-
-        $store = $this->store(['num1' => $num1,'num2' => $num2,'opcion' => $opcion]);
-        // var_dump($_POST);
-        
-        if($store){
-            $mensaje = "se ha creado un nuevo registro de operacion";
-        }else{
-            $mensaje = " ha ocurrido un error con la creacio de la operacion";
-        }
-        
-    }
-    // actualizar
-    public function update(){
-        $id = $_POST['id'];
-
-        $data= [
-            'id' => $_POST['id'],
-            'num1' => $_POST['num1'],
-            'num2' => $_POST['num2'],
-            'opcion' => $_POST['opcion']
+        $datos = [
+            'num_uno' => $_REQUEST['num_uno'],
+            'num_dos' => $_REQUEST['num_dos'],
+            'operacion' => $_REQUEST['operacion']
         ];
 
+        $calculadora = new CalculadoraModel();
+        $result = $calculadora->store($datos);
+
         if ($result) {
-            $this->views->mensaje = "El numero se ha actualizado correctamente";
-        } else {
-            $this->views->mensaje = "El numero no se ha actualizado";
+            header("Location: ../index.php");
+            exit();
         }
 
+        return $result;
     }
-     
 }
-print "90 ";
+print "estas en calculdora controler";

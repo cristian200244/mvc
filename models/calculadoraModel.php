@@ -1,62 +1,61 @@
 
 <?php
-require_once '../controllers/calculadoraController.php';
-class CalculadoraModel   
+
+require_once 'conexionModel.php';
+
+class CalculadoraModel
 {
-    
-    public $num1;
-    public $num2;
-    public $opcion;
+    private $num_uno;
+    private $num_dos;
+    private $operacion;
 
-    public function __construct($num1, $num2, $opcion)
+    public function store($datos)
     {
-         
-        $this->num1 = $num1;
-        $this->num2 = $num2;
-        $this->opcion = $opcion;
+        
+        try {
+            
+            $resultado = self::resultadoOperacion($datos);
+            $sql = 'INSERT INTO operaciones(num_uno, num_dos, operacion, resultado) VALUES(:num_uno, :num_dos, :operacion, :resultado)';
 
-    }
+            $db = new DataBase();
+            $prepare = $db->conect()->prepare($sql);
+            $query = $prepare->execute([
+                'num_uno'   => $datos['num_uno'],
+                'num_dos'   => $datos['num_dos'],
+                'operacion' => $datos['operacion'],
+                'resultado' => $resultado,
+            ]);
 
-    public function realizarOperacion()
-    {
-        switch ($this->opcion) {
-            case '1':
-                return $this->num1 + $this->num2;
-                break;
-            case '2':
-                return $this->num1 - $this->num2;
-                break;
-            case '3':
-                return $this->num1 * $this->num2;
-                break;
-            case '4':
-                if ($this->num1 === 0) {
-                    return "no se puede dividir en cero inbecil, por favor cambie el pinche valor";
-                }
-                return $this->num1 / $this->num2;
-
-                break;
+            if ($query) {
+                return true;
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
         }
     }
 
+    public function resultadoOperacion($datos)
+    {
+        switch ($datos['operacion']) {
+            case '1': //Suma
+                return $datos['num_uno'] + $datos['num_dos'];
+                break;
+            case '2': //Resta
+                # code...
+                return $datos['num_uno'] - $datos['num_dos'];
+                break;
+            case '3': //Multiplicación
+                return $datos['num_uno'] * $datos['num_dos'];
+                # code...
+                break;
+            case '4': //División
+                return $datos['num_uno'] / $datos['num_dos'];
+                # code...
+                break;
+
+            default:
+                return false;
+                break;
+        }
+    }
 }
-
-
-// $num1 = $_REQUEST['num1'];
-// $num2 = $_REQUEST['num2'];
-// $opcion = $_REQUEST['opcion'];
-
-// $hacer_operacion = new Calculadora($num1, $num2, $opcion);
-
-// $hacer_operacion->num1 = ['num1'];
-// $hacer_operacion->num2 = ['num2'];
-// $hacer_operacion->opcion = ['opcion'];
-
-
-// $hacer_operacion = new Calculadora($num1, $num2, $opcion);
-// $resultado = $hacer_operacion->realizarOperacion();
-
-
-// echo "el numero uno es: " . $num1 . "<br>";
-// echo "el numero dos es: " . $num2 . "<br>";
-// echo "el resultado de la " . $opcion . " es: " . $resultado;
