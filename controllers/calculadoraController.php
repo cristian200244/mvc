@@ -1,12 +1,13 @@
 <?php
 
-require_once '../Models/CalculadoraModel.php';
+require_once '../models/calculadoraModel.php';
 
 $calculadora = new CalculadoraController;
 
 class CalculadoraController
 {
-
+    
+    
     public function __construct()
     {
         switch ($_POST['c']) {
@@ -32,11 +33,10 @@ class CalculadoraController
         $result = $calculadora->store($datos);
 
         if ($result) {
-            header("Location: ../index.php");
+            header("Location: ../views/calculadora/index.php");
             exit();
         }
 
         return $result;
     }
 }
-print "estas en calculdora controler";

@@ -15,9 +15,9 @@ class CalculadoraModel
         try {
             
             $resultado = self::resultadoOperacion($datos);
-            $sql = 'INSERT INTO operaciones(num_uno, num_dos, operacion, resultado) VALUES(:num_uno, :num_dos, :operacion, :resultado)';
+            $sql = 'INSERT INTO calculadora(num_uno, num_dos, operacion, resultado) VALUES(:num_uno, :num_dos, :operacion, :resultado)';
 
-            $db = new DataBase();
+            $db = new Database();
             $prepare = $db->conect()->prepare($sql);
             $query = $prepare->execute([
                 'num_uno'   => $datos['num_uno'],
@@ -58,4 +58,5 @@ class CalculadoraModel
                 break;
         }
     }
+     
 }

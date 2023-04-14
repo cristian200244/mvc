@@ -1,0 +1,4 @@
+#ignora el archivo de configuración personal
+/Config/config.php
+
+/public/imgs

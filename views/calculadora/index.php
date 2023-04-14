@@ -1,12 +1,5 @@
 <?php
-
-// require_once("../../models/conexionModel.php");
-// require_once("../../models/calculadoraModel.php");
-
-// $query  = "SELECT * FROM calculadora";
-// $result =  mysqli_query($con, $query) or die(mysqli_error($con));
-
-
+require_once '../../models/conexionModel.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -26,17 +19,18 @@
             <div class="col">
                 <h1>Calculadora</h1>
                 <form method="POST" action="../../controllers/calculadoraController.php">
+                    <input type="hidden" name="c" value="1">
                     <div class="mb-3">
-                        <label for="num1" class="form-label">Primer Número</label>
-                        <input type="number" class="form-control" id="num1" name="num1">
+                        <label for="num_uno" class="form-label">Primer Número</label>
+                        <input type="number" class="form-control" id="num_uno" name="num_uno">
                     </div>
                     <div class="mb-3">
-                        <label for="num2" class="form-label">Segundo Número</label>
-                        <input type="number" class="form-control" id="num2" name="num2">
+                        <label for="num_dos" class="form-label">Segundo Número</label>
+                        <input type="number" class="form-control" id="num_dos" name="num_dos">
                     </div>
                     <div class="mb-3">
-                        <label for="opcion" class="form-label">Seleccione la Operación:</label>
-                        <select class="form-control" name="opcion" id="opcion">
+                        <label for="operacion" class="form-label">Seleccione la Operación:</label>
+                        <select class="form-control" name="operacion" id="operacion">
                             <option value="1">Sumar</option>
                             <option value="2">Restar</option>
                             <option value="3">Multiplicar</option>
@@ -64,7 +58,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- php -->
+                        <?php
+                        
+                        $mostrar = new Database();
+                        
+
+                        $sql = "SELECT * FROM calculadora";
+                        $query = mysqli_query($con,$query);
+
+                        while($mostrar = mysqli_fetch_array($query)){
+                        ?>
+                        <tr>
+                            <td><?php echo $pos; ?></td>
+                            <td><?php echo $mostrar['num_uno']; ?></td>
+                            <td><?php echo $mostrar['num_dos']; ?></td>
+                            <td><?php echo $mostrar['operacion']; ?></td>
+                        </tr>
+                        <?php 
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
