@@ -6,21 +6,30 @@ $calculadora = new CalculadoraController;
 
 class CalculadoraController
 {
-    
-    
+
     public function __construct()
     {
-        switch ($_POST['c']) {
-            case '1': //Almacenar en la base de datos
-                self::store();
-                break;
+        if (isset($_REQUEST['c'])) {
+            switch ($_REQUEST['c']) {
+                case '1': //Almacenar en la base de datos
+                    self::store();
+                    break;
 
-            default:
-                # code...
-                break;
+                default:
+                    self::index();
+                    break;
+            }
         }
     }
-    
+
+    public function index()
+    {
+        $resultados = new CalculadoraModel();
+        $data = $resultados->getAll();
+
+        return $data;
+    }
+
     public function store()
     {
         $datos = [
@@ -33,7 +42,7 @@ class CalculadoraController
         $result = $calculadora->store($datos);
 
         if ($result) {
-            header("Location: ../views/calculadora/index.php");
+            header("Location: " . constant('URL') . "../views/calculadora/index.php");
             exit();
         }
 

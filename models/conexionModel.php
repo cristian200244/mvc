@@ -1,13 +1,12 @@
 <?php
-require_once '../Config/config_example.php';
 
 class Database
 {
-    private $host;
-    private $db;
-    private $user;
-    private $password;
-    private $charset;
+    public $host;
+    public $db;
+    public $user;
+    public $password;
+    public $charset;
 
     public function __construct()
     {
@@ -20,7 +19,7 @@ class Database
 
     public function conect()
     {
-        try {
+        try {   
             $con = "mysql:host=" . $this->host . ";dbname=" . $this->db . ";charset=" . $this->charset;
             $opt = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

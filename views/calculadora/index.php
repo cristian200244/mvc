@@ -1,5 +1,8 @@
 <?php
-require_once '../../models/conexionModel.php';
+ 
+require_once '../../models/calculadoraModel.php';
+$data = new CalculadoraModel();
+$registros = $data->getAll();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -59,30 +62,34 @@ require_once '../../models/conexionModel.php';
                     </thead>
                     <tbody>
                         <?php
-                        
-                        $mostrar = new Database();
-                        
+                        if ($registros) {
+                            foreach ($registros as $row) {
 
-                        $sql = "SELECT * FROM calculadora";
-                        $query = mysqli_query($con,$query);
 
-                        while($mostrar = mysqli_fetch_array($query)){
                         ?>
-                        <tr>
-                            <td><?php echo $pos; ?></td>
-                            <td><?php echo $mostrar['num_uno']; ?></td>
-                            <td><?php echo $mostrar['num_dos']; ?></td>
-                            <td><?php echo $mostrar['operacion']; ?></td>
+                                <tr>
+                                    <td><?= $row->num_uno ?></td>
+                                    <td><?= $row->num_dos ?></td>
+                                    <td><?= $row->operacion ?></td>
+                                    <td><?= $row->resultado ?></td>
+                                    <td>
+                                        <a class="btn btn-sm btn-outline-warning" href="<?= $row->id ?>">Actualizar</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-outline-danger" href="<?= $row->id ?>"">Eliminar</a> 
+                                </td>
                         </tr>
-                        <?php 
+                        <?php
+                            }
                         }
+
                         ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 
 </html>
