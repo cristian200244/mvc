@@ -55,4 +55,3 @@ class CalculadoraController
         return $result;
     }
 }
-echo "hola";
