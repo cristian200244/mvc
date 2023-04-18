@@ -52,7 +52,7 @@ $registros = $data->getAll();
                 <table class="table table-sm table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <!-- <th scope="col">#</th> -->
                             <th scope="col">Primer Numero</th>
                             <th scope="col">Segundo Numero</th>
                             <th scope="col">operador</th>
@@ -73,10 +73,10 @@ $registros = $data->getAll();
                                     <td><?= $row->operacion ?></td>
                                     <td><?= $row->resultado ?></td>
                                     <td>
-                                        <a class="btn btn-sm btn-outline-warning" href="<?= $row->id ?>">Actualizar</a>
+                                        <a class="btn btn-sm btn-outline-warning" href="../../controllers/calculadoraController.php"<?= $row->id ?>">Actualizar</a>
                                     </td>
                                     <td>
-                                        <a class="btn btn-sm btn-outline-danger" href="<?= $row->id ?>"">Eliminar</a> 
+                                        <a class="btn btn-sm btn-outline-danger" href="../../controllers/calculadoraController.php"<?= $row->id ?>">Eliminar</a> 
                                 </td>
                         </tr>
                         <?php
