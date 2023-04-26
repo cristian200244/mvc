@@ -20,14 +20,14 @@ class Database
         $this->password = constant('PASSWORD');
         $this->charset  = constant('CHARSET');
     }
-// El método "conect()" es el encargado de establecer la conexión a la base de datos. 
-// Utiliza la función "try-catch" para capturar excepciones de PDO en caso de que ocurra algún error durante la conexión.
+    // El método "conect()" es el encargado de establecer la conexión a la base de datos. 
+    // Utiliza la función "try-catch" para capturar excepciones de PDO en caso de que ocurra algún error durante la conexión.
     public function conect()
     {
         // Dentro del bloque "try", se construye la cadena de conexión utilizando los valores
         //  de las propiedades de la clase. Luego, se define un array de opciones para la conexión PDO,
         //  estableciendo el modo de errores y la emulación de preparaciones a false.
-        try {   
+        try {
             $con = "mysql:host=" . $this->host . ";dbname=" . $this->db . ";charset=" . $this->charset;
             $opt = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -42,4 +42,3 @@ class Database
         }
     }
 }
-

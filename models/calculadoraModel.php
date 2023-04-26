@@ -1,12 +1,13 @@
 
 <?php
-include_once dirname(__FILE__).'../../Config/config_example.php';
+include_once dirname(__FILE__) . '../../Config/config_example.php';
 require_once 'conexionModel.php';
 
 
 
 class CalculadoraModel extends stdClass
 {
+    private $id;
     public $num_uno;
     public $num_dos;
     public $operacion;
@@ -16,6 +17,12 @@ class CalculadoraModel extends stdClass
     public function __construct()
     {
         $this->db = new Database();
+    }
+
+    //Metodos Mágicos
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getAll()
@@ -69,6 +76,43 @@ class CalculadoraModel extends stdClass
         }
     }
 
+    public function update($datos)
+    {
+        try {
+            $sql = 'UPDATE operaciones SET num_uno =:num_uno, num_dos=:num_dos, operacion=:operacion, WHERE id=:id';
+            $prepare = $this->db->conect()->prepare($sql);
+            $query = $prepare->execute([
+                'num_uno'   => $datos['num_uno'],
+                'num_dos'   => $datos['num_dos'],
+                'operacion' => $datos['operacion'],
+            ]);
+
+
+            return true;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $sql = "DELETE FROM operaciones WHERE id=:id";
+
+            $prepare = $this->db->conect()->prepare($sql);
+            $query = $prepare->execute([
+                'id' => $id,
+            ]);
+
+            if ($query) {
+                return true;
+            }
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+     
+
     public function resultadoOperacion($datos)
     {
         switch ($datos['operacion']) {
@@ -92,5 +136,10 @@ class CalculadoraModel extends stdClass
                 return false;
                 break;
         }
+    }
+
+    public function EstiloMillares($valor)
+    {
+        return number_format($valor, 2, ',', '.');
     }
 }

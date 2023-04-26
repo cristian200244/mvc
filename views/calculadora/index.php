@@ -1,8 +1,9 @@
 <?php
- 
+
 require_once '../../models/calculadoraModel.php';
 $data = new CalculadoraModel();
 $registros = $data->getAll();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -41,7 +42,7 @@ $registros = $data->getAll();
                         </select>
                     </div>
                     <div class="mb-3">
-                        <input type="submit" class="btn btn-outline-dark btn-sm" value="enviar">
+                        <button class="btn btn-primary" type="submit">Guardar</button>
 
                     </div>
                 </form>
@@ -61,24 +62,24 @@ $registros = $data->getAll();
                         </tr>
                     </thead>
                     <tbody>
+
                         <?php
                         if ($registros) {
                             foreach ($registros as $row) {
-
 
                         ?>
                                 <tr>
                                     <td><?= $row->num_uno ?></td>
                                     <td><?= $row->num_dos ?></td>
                                     <td><?= $row->operacion ?></td>
-                                    <td><?= $row->resultado ?></td>
+                                    <td><?= $row->EstiloMillares($row->resultado) ?></td>
                                     <td>
-                                        <a class="btn btn-sm btn-outline-warning" href="../../controllers/calculadoraController.php"<?= $row->id ?>">Actualizar</a>
+                                        <a class="btn btn-sm btn-outline-warning" href="../../controllers/calculadoraController.php?c=2&id=<?= $row->getId() ?>"">Actualizar</a>
                                     </td>
                                     <td>
-                                        <a class="btn btn-sm btn-outline-danger" href="../../controllers/calculadoraController.php"<?= $row->id ?>">Eliminar</a> 
-                                </td>
-                        </tr>
+                                        <a class=" btn btn-sm btn-outline-danger" href="../../controllers/calculadoraController.php?c=3&id=<?= $row->getId() ?>"">Eliminar</a>
+                                    </td>
+                                </tr>
                         <?php
                             }
                         }
