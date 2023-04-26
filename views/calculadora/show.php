@@ -22,15 +22,17 @@
                     <input type="hidden" name="id" value="<?= $row->id ?>">
                     <div class="mb-3">
                         <label for="num_uno" class="form-label">Primer Número</label>
-                        <input type="number" class="form-control" id="num_uno" name="num_uno">
+                        <input type="number" class="form-control" id="num_uno" name="num_uno" value="<?= $this->calculadora->num_uno ?>">
                     </div>
                     <div class="mb-3">
                         <label for="num_dos" class="form-label">Segundo Número</label>
-                        <input type="number" class="form-control" id="num_dos" name="num_dos">
+                        <input type="number" class="form-control" id="num_dos" name="num_dos" value="<?= $this->calculadora->$num_dos ?>">
                     </div>
                     <div class="mb-3">
                         <label for="operacion" class="form-label">Seleccione la Operación:</label>
-                        <select class="form-control" name="operacion" id="operacion">
+                        <select class="form-control" name="operacion" id="operacion" value="<?= $this->calculadora->operacion ?>">
+
+                            <option >Elige una operacion</option>
                             <option value="1">Sumar</option>
                             <option value="2">Restar</option>
                             <option value="3">Multiplicar</option>

@@ -27,11 +27,25 @@ class CalculadoraModel extends stdClass
 
     public function getById($id)
     {
-        $sql =" :id";
+        try {
+            $sql  = 'SELECT * FROM operaciones WHERE id = :id';
+            $query = $this->db->conect()->prepare($sql);
+            $query->execute([
+                'id' => $id
+            ]);
 
+            while ($row = $query->fetch()) {
+                $item = new CalculadoraModel;
+                $item->id           = $row['id'];
+                $item->num_uno      = $row['num_uno'];
+                $item->num_dos    = $row['num_dos'];
+                $item->operacion    = $row['operacion'];
+            }
 
-        
-        // return $data;
+            return $item;
+        } catch (PDOException $e) {
+            return ['mensaje' => $e];
+        }
     }
 
     public function getAll()
@@ -88,7 +102,7 @@ class CalculadoraModel extends stdClass
     public function update($datos)
     {
         // var_dump($datos);
-        
+
         try {
             $sql = 'UPDATE operaciones SET num_uno =:num_uno, num_dos=:num_dos, operacion=:operacion, WHERE id=:id';
             $prepare = $this->db->conect()->prepare($sql);
@@ -123,7 +137,7 @@ class CalculadoraModel extends stdClass
             die($e->getMessage());
         }
     }
-     
+
 
     public function resultadoOperacion($datos)
     {
@@ -146,12 +160,13 @@ class CalculadoraModel extends stdClass
 
             default:
                 return false;
+                 
                 break;
         }
     }
 
-    public function EstiloMillares($valor)
-    {
-        return number_format($valor, 2, ',', '.');
-    }
+    // public function EstiloMillares($valor)
+    // {
+    //     return number_format($valor, 2, ',', '.');
+    // }
 }

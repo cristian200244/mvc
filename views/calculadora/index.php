@@ -35,6 +35,7 @@ $registros = $data->getAll();
                     <div class="mb-3">
                         <label for="operacion" class="form-label">Seleccione la Operación:</label>
                         <select class="form-control" name="operacion" id="operacion">
+                            <option>Elige una operacion</option>
                             <option value="1">Sumar</option>
                             <option value="2">Restar</option>
                             <option value="3">Multiplicar</option>
@@ -72,7 +73,8 @@ $registros = $data->getAll();
                                     <td><?= $row->num_uno ?></td>
                                     <td><?= $row->num_dos ?></td>
                                     <td><?= $row->operacion ?></td>
-                                    <td><?= $row->EstiloMillares($row->resultado) ?></td>
+                                    <td><?= $row->resultado ?></td>
+                                    <!-- php $row->EstiloMillares($row->resultado) php -->
                                     <td>
                                         <a class="btn btn-sm btn-outline-warning" href="../../controllers/calculadoraController.php?c=2&id=<?= $row->getId() ?>"">Actualizar</a>
                                     </td>
