@@ -52,7 +52,6 @@ class CalculadoraController
             'operacion' => $_REQUEST['operacion']
         ];
 
-
         $result = $this->calculadora->store($datos);
 
         if ($result) {
@@ -69,11 +68,28 @@ class CalculadoraController
         $this->calculadora->delete($_REQUEST['id']);
         header("Location: ../views/calculadora/index.php");
     }
-    
+
+    public function show()
+    {
+        var_dump($_REQUEST);
+        $id = $_REQUEST['id'];
+        $this->calculadora->getByid($id);
+        //cargar los datos de la operacion por el id
+        
+        header("Location: ../views/calculadora/show.php");
+    }
+
     public function update()
     {
-        $this->calculadora->update($_REQUEST['id']);
-        header("Location: ../views/calculadora/update.php");
+        $datos = [
+            'id'        => $_REQUEST['id'],
+            'num_uno'   => $_REQUEST['num_uno'],
+            'num_dos'   => $_REQUEST['num_dos'],
+            'operacion' => $_REQUEST['operacion']
+        ];
+
+        $this->calculadora->update($datos);
+        header("Location: ../views/calculadora/index.php");
+        die();
     }
-    
 }

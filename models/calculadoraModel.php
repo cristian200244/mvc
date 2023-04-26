@@ -25,6 +25,15 @@ class CalculadoraModel extends stdClass
         return $this->id;
     }
 
+    public function getById($id)
+    {
+        $sql =" :id";
+
+
+        
+        // return $data;
+    }
+
     public function getAll()
     {
         $items = [];
@@ -78,10 +87,13 @@ class CalculadoraModel extends stdClass
 
     public function update($datos)
     {
+        // var_dump($datos);
+        
         try {
             $sql = 'UPDATE operaciones SET num_uno =:num_uno, num_dos=:num_dos, operacion=:operacion, WHERE id=:id';
             $prepare = $this->db->conect()->prepare($sql);
             $query = $prepare->execute([
+                'id'        => $datos['id'],
                 'num_uno'   => $datos['num_uno'],
                 'num_dos'   => $datos['num_dos'],
                 'operacion' => $datos['operacion'],

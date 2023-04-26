@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
-    <title>Document</title>
+    <title>Actualizar Registro</title>
 </head>
 
 <body class="m-5">
@@ -19,7 +18,8 @@
                 <h3>Actualizacion de datos de la calculadora</h3>
                 <hr>
                 <form method="POST" action="../../controllers/calculadoraController.php">
-                    <input type="hidden" name="c" value="1">
+                    <input type="hidden" name="c" value="2">
+                    <input type="hidden" name="id" value="<?= $row->id ?>">
                     <div class="mb-3">
                         <label for="num_uno" class="form-label">Primer Número</label>
                         <input type="number" class="form-control" id="num_uno" name="num_uno">
