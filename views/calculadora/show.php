@@ -44,9 +44,9 @@ foreach ($registro as $operacion) {
                     </div>
                     <div class="mb-3">
                         <label for="operacion" class="form-label">Seleccione la Operación:</label>
-                        <select class="form-control" name="operacion" id="operacion" value="<?= ''?>" required >
+                        <select class="form-control" name="operacion" id="operacion" value="<?= ''?>" required="required" >
 
-                            <option >Elige una operacion</option>
+                            <option > </option>
                             <option value="1">Sumar</option>
                             <option value="2">Restar</option>
                             <option value="3">Multiplicar</option>
