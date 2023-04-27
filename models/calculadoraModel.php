@@ -27,6 +27,8 @@ class CalculadoraModel extends stdClass
 
     public function getById($id)
     {
+        $operacion = [];
+
         try {
             $sql  = 'SELECT * FROM operaciones WHERE id = :id';
             $query = $this->db->conect()->prepare($sql);
@@ -35,14 +37,16 @@ class CalculadoraModel extends stdClass
             ]);
 
             while ($row = $query->fetch()) {
-                $item = new CalculadoraModel;
+                $item = new CalculadoraModel();
                 $item->id           = $row['id'];
                 $item->num_uno      = $row['num_uno'];
                 $item->num_dos    = $row['num_dos'];
                 $item->operacion    = $row['operacion'];
+
+                array_push($operacion, $item);
             }
 
-            return $item;
+            return $operacion;
         } catch (PDOException $e) {
             return ['mensaje' => $e];
         }
@@ -101,20 +105,20 @@ class CalculadoraModel extends stdClass
 
     public function update($datos)
     {
-        // var_dump($datos);
-
         try {
-            $sql = 'UPDATE operaciones SET num_uno =:num_uno, num_dos=:num_dos, operacion=:operacion, WHERE id=:id';
+            $resultado = self::resultadoOperacion($datos);
+            $sql = 'UPDATE operaciones SET num_uno=:num_uno, num_dos=:num_dos, operacion=:operacion, resultado = :resultado WHERE id=:id';
             $prepare = $this->db->conect()->prepare($sql);
             $query = $prepare->execute([
                 'id'        => $datos['id'],
                 'num_uno'   => $datos['num_uno'],
                 'num_dos'   => $datos['num_dos'],
                 'operacion' => $datos['operacion'],
+                'resultado' => $resultado,
             ]);
-
-
+            if ($query){
             return true;
+            }
         } catch (PDOException $e) {
             die($e->getMessage());
         }
@@ -160,7 +164,7 @@ class CalculadoraModel extends stdClass
 
             default:
                 return false;
-                 
+
                 break;
         }
     }

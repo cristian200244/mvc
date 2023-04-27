@@ -34,8 +34,8 @@ $registros = $data->getAll();
                     </div>
                     <div class="mb-3">
                         <label for="operacion" class="form-label">Seleccione la Operación:</label>
-                        <select class="form-control" name="operacion" id="operacion">
-                            <option>Elige una operacion</option>
+                        <select class="form-control" name="operacion" id="operacion" required="required"">
+                            <option value=""></option>
                             <option value="1">Sumar</option>
                             <option value="2">Restar</option>
                             <option value="3">Multiplicar</option>
@@ -54,7 +54,7 @@ $registros = $data->getAll();
                 <table class="table table-sm table-striped">
                     <thead>
                         <tr>
-                            <!-- <th scope="col">#</th> -->
+
                             <th scope="col">Primer Numero</th>
                             <th scope="col">Segundo Numero</th>
                             <th scope="col">operador</th>
@@ -70,16 +70,17 @@ $registros = $data->getAll();
 
                         ?>
                                 <tr>
+
                                     <td><?= $row->num_uno ?></td>
                                     <td><?= $row->num_dos ?></td>
                                     <td><?= $row->operacion ?></td>
                                     <td><?= $row->resultado ?></td>
                                     <!-- php $row->EstiloMillares($row->resultado) php -->
                                     <td>
-                                        <a class="btn btn-sm btn-outline-warning" href="../../controllers/calculadoraController.php?c=2&id=<?= $row->getId() ?>"">Actualizar</a>
+                                        <a class="btn btn-sm btn-outline-warning" href="../../controllers/calculadoraController.php?c=2&id=<?= $row->getId() ?>">Actualizar</a>
                                     </td>
                                     <td>
-                                        <a class=" btn btn-sm btn-outline-danger" href="../../controllers/calculadoraController.php?c=3&id=<?= $row->getId() ?>"">Eliminar</a>
+                                        <a class=" btn btn-sm btn-outline-danger" href="../../controllers/calculadoraController.php?c=4&id=<?= $row->getId() ?> ">Eliminar</a>
                                     </td>
                                 </tr>
                         <?php

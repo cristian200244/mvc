@@ -18,10 +18,13 @@ class CalculadoraController
                 case '1': //Almacenar en la base de datos
                     self::store();
                     break;
-                case '2': //Actualizar el registro
-                    self::update();
+                case '2': //ver usuario
+                    self::show();
                     break;
                 case '3': //Actualizar el registro
+                    self::update();
+                    break;
+                case '4': //eliminar el registro
                     self::delete();
                     break;
                 default:
@@ -33,9 +36,7 @@ class CalculadoraController
 
     public function index()
     {
-        $data = $this->calculadora->getAll();
-
-        return $data;
+        return  $this->calculadora->getAll();
     }
     //Método "store()": Este método obtiene los datos de la solicitud ($_REQUEST) para 
     // 'num_uno', 'num_dos' y 'operacion' y los guarda en un arreglo llamado "$datos".
@@ -46,21 +47,26 @@ class CalculadoraController
 
     public function store()
     {
-        $datos = [
-            'num_uno' => $_REQUEST['num_uno'],
-            'num_dos' => $_REQUEST['num_dos'],
-            'operacion' => $_REQUEST['operacion']
-        ];
+        if (isset($_REQUEST)) {
+            if (isset($_REQUEST['operacion']) && ($_REQUEST['operacion'] != 0) && isset($_REQUEST['num_uno']) && isset($_REQUEST['num_dos'])) {
 
-        $result = $this->calculadora->store($datos);
+                $datos = [
+                    'num_uno' => $_REQUEST['num_uno'],
+                    'num_dos' => $_REQUEST['num_dos'],
+                    'operacion' => $_REQUEST['operacion']
+                ];
 
-        if ($result) {
+                $result = $this->calculadora->store($datos);
 
-            header("Location: ../views/calculadora/index.php");
-            exit();
+                if ($result) {
+
+                    header("Location: ../views/calculadora/index.php");
+                    exit();
+                }
+            } else {
+                echo $error = "Ocurrió un error";
+            }
         }
-
-        return $result;
     }
 
     public function delete()
@@ -71,25 +77,28 @@ class CalculadoraController
 
     public function show()
     {
-        var_dump($_REQUEST);
+
         $id = $_REQUEST['id'];
-        $this->calculadora->getByid($id);
-        //cargar los datos de la operacion por el id
-        
-        header("Location: ../views/calculadora/show.php");
+        header("Location: ../views/calculadora/show.php?id=" . $id);
     }
 
     public function update()
     {
         $datos = [
+
             'id'        => $_REQUEST['id'],
             'num_uno'   => $_REQUEST['num_uno'],
             'num_dos'   => $_REQUEST['num_dos'],
             'operacion' => $_REQUEST['operacion']
         ];
 
-        $this->calculadora->update($datos);
-        header("Location: ../views/calculadora/index.php");
-        die();
+        $result = $this->calculadora->update($datos);
+
+        if ($result) {
+            header("Location: ../views/calculadora/index.php");
+            exit();
+        }
+
+        return $result;
     }
 }
