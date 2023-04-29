@@ -21,7 +21,7 @@ $registros = $data->getAll();
     <div class="container bg-info">
         <div class="row">
             <div class="col">
-                <h1>Calculadora</h1>
+                <h1 class="text-center">Calculadora</h1>
                 <form method="POST" action="../../controllers/calculadoraController.php">
                     <input type="hidden" name="c" value="1">
                     <div class="mb-3">
@@ -30,8 +30,7 @@ $registros = $data->getAll();
                     </div>
                     <div class="mb-3">
                         <label for="num_dos" class="form-label">Segundo Número</label>
-                        <input type="number" class="form-control" id="num_dos" name="num_dos" required>
-                        
+                        <input type="number" class="form-control" id="num_dos" name="num_dos" required>  
                     </div>
                     <div class="mb-3">
                         <label for="operacion" class="form-label">Seleccione la Operación:</label>
@@ -44,14 +43,14 @@ $registros = $data->getAll();
                         </select>
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-primary" type="submit">Guardar</button>
+                        <button class="btn btn-success" type="submit">Guardar</button>
 
                     </div>
                 </form>
             </div>
             <hr>
             <div class="col">
-                <h1>Resultados:</h1>
+                <h1 class="text-center">Resultados:</h1>
                 <table class="table table-sm table-striped">
                     <thead>
                         <tr>

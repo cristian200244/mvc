@@ -123,7 +123,6 @@ class CalculadoraModel extends stdClass
             die($e->getMessage());
         }
     }
-
     public function delete($id)
     {
         try {
