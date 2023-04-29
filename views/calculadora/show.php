@@ -41,6 +41,7 @@ foreach ($registro as $operacion) {
                     <div class="mb-3">
                         <label for="num_dos" class="form-label">Segundo Número</label>
                         <input type="number" class="form-control" id="num_dos" name="num_dos"  value="<?= $num_dos?>" required > 
+                        
                     </div>
                     <div class="mb-3">
                         <label for="operacion" class="form-label">Seleccione la Operación:</label>

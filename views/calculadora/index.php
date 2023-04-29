@@ -26,17 +26,18 @@ $registros = $data->getAll();
                     <input type="hidden" name="c" value="1">
                     <div class="mb-3">
                         <label for="num_uno" class="form-label">Primer Número</label>
-                        <input type="number" class="form-control" id="num_uno" name="num_uno">
+                        <input type="number" class="form-control" id="num_uno" name="num_uno" required>
                     </div>
                     <div class="mb-3">
                         <label for="num_dos" class="form-label">Segundo Número</label>
-                        <input type="number" class="form-control" id="num_dos" name="num_dos">
+                        <input type="number" class="form-control" id="num_dos" name="num_dos" required>
+                        
                     </div>
                     <div class="mb-3">
                         <label for="operacion" class="form-label">Seleccione la Operación:</label>
                         <select class="form-control" name="operacion" id="operacion" required="required"">
                             <option value=""></option>
-                            <option value="1">Sumar</option>
+                            <option value=" 1">Sumar</option>
                             <option value="2">Restar</option>
                             <option value="3">Multiplicar</option>
                             <option value="4">Dividir</option>
@@ -80,7 +81,7 @@ $registros = $data->getAll();
                                         <a class="btn btn-sm btn-outline-warning" href="../../controllers/calculadoraController.php?c=2&id=<?= $row->getId() ?>">Actualizar</a>
                                     </td>
                                     <td>
-                                        <a class=" btn btn-sm btn-outline-danger" href="../../controllers/calculadoraController.php?c=4&id=<?= $row->getId() ?> ">Eliminar</a>
+                                        <a class=" btn btn-sm btn-outline-danger" href="../../controllers/calculadoraController.php?c=4&id=<?= $row->getId() ?>" id="eliminar">Eliminar</a>
                                     </td>
                                 </tr>
                         <?php
@@ -97,4 +98,5 @@ $registros = $data->getAll();
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../public/js/alert.js"></script>
 </body>
+
 </html>

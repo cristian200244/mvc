@@ -94,7 +94,7 @@ class CalculadoraModel extends stdClass
                 'operacion' => $datos['operacion'],
                 'resultado' => $resultado,
             ]);
-
+             
             if ($query) {
                 return true;
             }
@@ -140,6 +140,7 @@ class CalculadoraModel extends stdClass
         } catch (Exception $e) {
             die($e->getMessage());
         }
+
     }
 
 

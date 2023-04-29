@@ -8,10 +8,12 @@ class CalculadoraController
 {
 
     private $calculadora;
+ 
 
     public function __construct()
     {
         $this->calculadora = new CalculadoraModel();
+       
 
         if (isset($_REQUEST['c'])) {
             switch ($_REQUEST['c']) {
@@ -48,18 +50,14 @@ class CalculadoraController
     public function store()
     {
         if (isset($_REQUEST)) {
-            if (isset($_REQUEST['operacion']) && ($_REQUEST['operacion'] != 0) && isset($_REQUEST['num_uno']) && isset($_REQUEST['num_dos'])) {
-
+            if (isset($_REQUEST['operacion']) && ($_REQUEST['operacion'] != 0) && isset($_REQUEST['num_uno']) && isset($_REQUEST['num_dos'])) {     
                 $datos = [
                     'num_uno' => $_REQUEST['num_uno'],
                     'num_dos' => $_REQUEST['num_dos'],
                     'operacion' => $_REQUEST['operacion']
                 ];
-
                 $result = $this->calculadora->store($datos);
-
                 if ($result) {
-
                     header("Location: ../views/calculadora/index.php");
                     exit();
                 }
@@ -77,7 +75,6 @@ class CalculadoraController
 
     public function show()
     {
-
         $id = $_REQUEST['id'];
         header("Location: ../views/calculadora/show.php?id=" . $id);
     }
