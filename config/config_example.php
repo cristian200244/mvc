@@ -10,11 +10,7 @@ define('DIR', dirname(__FILE__));
 define('HOST', 'localhost');
 define('DB', 'calculadora');
 define('USER', 'root');
-// ---------------------------------------
-// contraseña de la based de datos de mi portatil
-define('PASSWORD', '123456789');
-// -----------------------------------------
 // contraseña de la based de datos del sena 
-// define('PASSWORD', 'root');
+define('PASSWORD', 'root');
 
 define('CHARSET', 'utf8mb4');
